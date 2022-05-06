@@ -16,83 +16,83 @@ namespace RDM {
         unimagMusic.add_song({ "Bad guy", "Billie Ellish", "When we're fall sleep" });
 
         do {
-        clearConsole();
-        cout << "=====================================\n";
-        cout << "           Select a Option\n";
-        cout << "=====================================\n\n";
+            clearConsole();
+            cout << "=====================================\n";
+            cout << "           Select a Option\n";
+            cout << "=====================================\n\n";
 
-        unimagMusic.show_playing_songs();
-        cout << "\n";
+            unimagMusic.show_playing_songs();
+            cout << "\n";
 
-        cout << " 1. Add a song\n";
-        cout << " 2. Add a song to favorites\n";
-        cout << " 3. Play a song\n";
-        cout << " 4. Play songs favorites\n";
-        cout << " 5. Show songs\n";
-        cout << " 6. Show songs favorites\n";
-        cout << " 7. Play next\n";
-        cout << " 8. Play previous\n";
-        cout << " 9. Play a random song\n";
-        cout << "10. Edit data of a song\n";
-        cout << "11. Remove a song\n";
-        cout << "12. Remove a song from favorites\n";
-        cout << "13. Sort list\n";
-        cout << "14. Exit\n";
+            cout << " 1. Add a song\n";
+            cout << " 2. Add a song to favorites\n";
+            cout << " 3. Play a song\n";
+            cout << " 4. Play songs favorites\n";
+            cout << " 5. Show songs\n";
+            cout << " 6. Show songs favorites\n";
+            cout << " 7. Play next\n";
+            cout << " 8. Play previous\n";
+            cout << " 9. Play a random song\n";
+            cout << "10. Edit data of a song\n";
+            cout << "11. Remove a song\n";
+            cout << "12. Remove a song from favorites\n";
+            cout << "13. Sort list\n";
+            cout << "14. Exit\n";
 
-        cout << "\nYour Option: ";
-        cin >> option;
-        cin.ignore();
+            cout << "\nYour Option: ";
+            cin >> option;
+            cin.ignore();
 
-        switch (option) {
-        case 1:
-            addSong(unimagMusic);
-            break;
-        case 2:
-            addSongToFavorites(unimagMusic);
-            break;
-        case 3:
-            playSong(unimagMusic);
-            break;
-        case 4:
-            playFavoriteSongs(unimagMusic);
-            break;
-        case 5:
-            showSongs(unimagMusic);
-            break;
-        case 6:
-            showFavoriteSongs(unimagMusic);
-            break;
-        case 7:
-            try { unimagMusic.play_next(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
-            break;
-        case 8:
-            try { unimagMusic.play_prev(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
-            break;
-        case 9:
-            try { unimagMusic.play_random(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
-            break;
-        case 10:
-            editSong(unimagMusic);
-            break;
-        case 11:
-            removeSongs(unimagMusic);
-            break;
-        case 12:
-            removeSongFromFavorites(unimagMusic);
-            break;
-        case 13:
-            sortSongList(unimagMusic);
-            break;
-        case 14:
-            return; // Exit success
-        default:
-            break;
-        }
+            switch (option) {
+            case 1:
+                addSong(unimagMusic);
+                break;
+            case 2:
+                addSongToFavorites(unimagMusic);
+                break;
+            case 3:
+                playSong(unimagMusic);
+                break;
+            case 4:
+                playFavoriteSongs(unimagMusic);
+                break;
+            case 5:
+                showSongs(unimagMusic);
+                break;
+            case 6:
+                showFavoriteSongs(unimagMusic);
+                break;
+            case 7:
+                try { unimagMusic.play_next(); }
+                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                break;
+            case 8:
+                try { unimagMusic.play_prev(); }
+                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                break;
+            case 9:
+                try { unimagMusic.play_random(); }
+                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                break;
+            case 10:
+                editSong(unimagMusic);
+                break;
+            case 11:
+                removeSongs(unimagMusic);
+                break;
+            case 12:
+                removeSongFromFavorites(unimagMusic);
+                break;
+            case 13:
+                sortSongList(unimagMusic);
+                break;
+            case 14:
+                return; // Exit success
+            default:
+                break;
+            }
         } while (true); // Infinite loop
-        
+
     }
 
     void clearConsole() {
