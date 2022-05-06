@@ -109,18 +109,6 @@ namespace RDM {
         getline(cin, temp, '\n');
     }
 
-    bool printSongs(Reproducer& mr) {
-        try {
-            mr.list_songs();
-        }
-        catch (logic_error& e) {
-            cout << e.what() << endl;
-            pause();
-            return false;
-        }
-        return true;
-    }
-
     void addSong(Reproducer& mr) {
         string title;
         string artist;
@@ -144,11 +132,12 @@ namespace RDM {
         int id;
         clearConsole();
 
-        if (!printSongs(mr)) {
-            return;
+        if (mr.has_songs()) {
+            mr.list_songs();
         }
+        else { pause(); return; }
 
-        cout << "Input ID of song: ";
+        cout << "\nInput ID of song: ";
         cin >> id;
         cin.ignore();
 
@@ -164,9 +153,10 @@ namespace RDM {
     void playSong(Reproducer& mr) {
         int id;
         clearConsole();
-        if (!printSongs(mr)) {
-            return;
+        if (mr.has_songs()) {
+            mr.list_songs();
         }
+        else { pause(); return; }
 
         cout << "Input ID if song: ";
         cin >> id;
@@ -223,9 +213,10 @@ namespace RDM {
         Song* song;
         clearConsole();
 
-        if (!printSongs(mr)) {
-            return;
+        if (mr.has_songs()) {
+            mr.list_songs();
         }
+        else { pause(); return; }
 
         cout << "Input ID of song: ";
         cin >> id;
@@ -266,10 +257,12 @@ namespace RDM {
         cout << "          Sort by\n";
         cout << "=============================\n\n";
 
-        cout << "1. Title\n";
-        cout << "2. Artist\n";
-        cout << "3. Updated at\n";
-        cout << "4. Back to menu\n\n";
+        cout << "1. Id\n";
+        cout << "2. Title\n";
+        cout << "3. Artist\n";
+        cout << "4. Album\n";
+        cout << "5. Updated at\n";
+        cout << "6. Back to menu\n\n";
 
         cout << "Your option: ";
         cin >> option;
@@ -277,12 +270,18 @@ namespace RDM {
 
         switch (option) {
         case 1:
-            mr.sort_by_title();
+            mr.sort_by_id();
             break;
         case 2:
-            mr.sort_by_artist();
+            mr.sort_by_title();
             break;
         case 3:
+            mr.sort_by_artist();
+            break;
+        case 4:
+            mr.sort_by_album();
+            break;
+        case 5:
             mr.sort_by_updated_at();
             break;
         default:
@@ -297,7 +296,11 @@ namespace RDM {
     void removeSongs(Reproducer& mr) {
         int id;
         clearConsole();
-        if (!printSongs(mr)) {
+
+        mr.list_songs();
+
+        if (!mr.has_songs()) {
+            pause();
             return;
         }
 
@@ -316,24 +319,22 @@ namespace RDM {
         int id;
         clearConsole();
 
-        try {
-            mr.list_favorite_songs();
-        }
-        catch (logic_error& e) {
-            cout << e.what() << endl;
+        mr.list_favorite_songs();
+        if (!mr.has_favorites()) {
             pause();
             return;
         }
 
         cout << "\nInput the ID: ";
         cin >> id;
+        cin.ignore();
 
         try {
             mr.remove_favorite(id);
         }
         catch (logic_error& e) {
             cout << e.what() << endl;
+            pause();
         }
     }
-
 }

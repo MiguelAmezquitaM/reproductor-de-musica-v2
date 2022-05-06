@@ -4,7 +4,7 @@
 
 namespace RDM {
 
-    void mainMenu();
+    void mainMenu(); // Funcion que arranca el menu principal
 
     void addSong(Reproducer& mr);
     void addSongToFavorites(Reproducer& mr);
@@ -16,8 +16,6 @@ namespace RDM {
     void removeSongFromFavorites(Reproducer& mr);
     void editSong(Reproducer& mr);
     void sortSongList(Reproducer& mr);
-
-    bool printSongs(Reproducer& mr);
 
     void clearConsole();
     void pause();

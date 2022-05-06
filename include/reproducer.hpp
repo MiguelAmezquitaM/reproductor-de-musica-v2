@@ -24,12 +24,15 @@ namespace RDM {
 
         void remove_favorite(const uint32_t id);
         void remove_song(const uint32_t id);
-
+        
+        void sort_by_id();
         void sort_by_artist();
         void sort_by_title();
+        void sort_by_album();
         void sort_by_updated_at();
 
         bool has_favorites() const;
+        bool has_songs() const;
 
     private:
         list<Song> m_songs;

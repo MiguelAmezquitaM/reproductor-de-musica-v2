@@ -95,8 +95,11 @@ namespace RDM {
     }
 
     void Reproducer::remove_favorite(const uint32_t id) {
-        if (!has_favorites()) throw logic_error(DontExistSongError(id));
-        get_song(id).is_favorite = false;
+        auto song_node = get_node_by_id(id);
+        if (!song_node or !song_node->value.is_favorite)
+            throw logic_error(DontExistSongError(id));
+
+        song_node->value.is_favorite = false;
         if (only_favorites and m_playing_song->value.id == id) { m_playing_song = nullptr; }
     }
 
@@ -122,11 +125,15 @@ namespace RDM {
         return has_favorites;
     }
 
+    bool Reproducer::has_songs() const {
+        return !m_songs.is_empty();
+    }
+
 
     void Reproducer::sort_by_updated_at() {
         for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
             for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
-                if ((*j).updated_at > j.get_node()->next->value.updated_at) {
+                if ((*j).updated_at < j.get_node()->next->value.updated_at) {
                     swap((*j), j.get_node()->next->value);
                 }
             }
@@ -146,6 +153,26 @@ namespace RDM {
         for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
             for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
                 if ((*j).title > j.get_node()->next->value.title) {
+                    swap((*j), j.get_node()->next->value);
+                }
+            }
+        }
+    }
+
+    void Reproducer::sort_by_id() {
+        for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
+                if ((*j).id > j.get_node()->next->value.id) {
+                    swap((*j), j.get_node()->next->value);
+                }
+            }
+        }
+    }
+
+    void Reproducer::sort_by_album() {
+        for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
+                if ((*j).album > j.get_node()->next->value.album) {
                     swap((*j), j.get_node()->next->value);
                 }
             }
@@ -187,8 +214,17 @@ namespace RDM {
         cout << "\n-------------------------------------------------------------------------------------------------------------------------------------\n";
     }
 
+    string format_time(const time_t& timer) {
+        string time_passed;
+        time_t time_past = time(0) - timer;
+        if (time_past > 3600) time_passed = to_string(time_past / 3600) + " hours left";
+        else if (time_past > 60) time_passed = to_string(time_past / 60) + " minutes left";
+        else time_passed = to_string(time_past) + " seconds left";
+        return time_passed;
+    }
+
     void Reproducer::m_print_song(const Song& song) {
-        cout << INITIAL_WIDTH << song.id << WIDTH << song.title << WIDTH << song.artist << WIDTH << song.album << WIDTH << ctime(&song.updated_at) << endl;
+        cout << INITIAL_WIDTH << song.id << WIDTH << song.title << WIDTH << song.artist << WIDTH << song.album << WIDTH << format_time(song.updated_at) << endl;
     }
 
     const _Setw Reproducer::INITIAL_WIDTH = setw(5);
