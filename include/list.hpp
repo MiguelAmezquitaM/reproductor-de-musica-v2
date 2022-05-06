@@ -76,14 +76,6 @@ namespace RDM {
         // Insert an element at index
         void push_front(const ValueType& element);
 
-        // Instance an element at last
-        template<typename... Args>
-        void emplace_back(Args&&... args);
-
-        // Instance an element at index
-        template<typename... Args>
-        void emplace_front(Args&&... args);
-
         // Pull methods
 
         // Return a reference to the index-th element 
