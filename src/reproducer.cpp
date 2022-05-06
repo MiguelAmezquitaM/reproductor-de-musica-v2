@@ -51,14 +51,17 @@ namespace RDM {
 
     void Reproducer::play_song(const uint32_t id) {
         m_playing_song = get_node_by_id(id);
+        only_favorites = false;
         if (!m_playing_song) throw logic_error(DontExistSongError(id));
     }
 
     void Reproducer::play_favorites() {
         if (!has_favorites()) throw logic_error(NoFavoritesSong);
         for (auto song : m_songs) {
-            if (song.is_favorite)
+            if (song.is_favorite) {
                 m_playing_song = get_node_by_id(song.id);
+                only_favorites = true;
+            }
         }
     }
 
@@ -70,7 +73,7 @@ namespace RDM {
                 m_playing_song = m_playing_song->next;
             } while (!m_playing_song->value.is_favorite);
         }
-        else m_playing_song = m_playing_song->next;
+        else m_playing_song = (m_playing_song->next == m_songs.end().get_node() ? m_playing_song->next->next : m_playing_song->next);
     }
 
     void Reproducer::play_prev() {
@@ -81,7 +84,7 @@ namespace RDM {
                 m_playing_song = m_playing_song->prev;
             } while (!m_playing_song->value.is_favorite);
         }
-        else m_playing_song = m_playing_song->prev;
+        else m_playing_song = (m_playing_song->prev == m_songs.end().get_node() ? m_playing_song->prev->prev : m_playing_song->prev);
     }
 
     void Reproducer::play_random() {
@@ -121,29 +124,29 @@ namespace RDM {
 
 
     void Reproducer::sort_by_updated_at() {
-        for (auto i = m_songs.begin(); i != --m_songs.end(); i++) {
-            for (auto j = ++m_songs.begin(); j != m_songs.end(); j++) {
-                if ((*i).updated_at > (*j).updated_at) {
-                    swap((*i), (*j));
+        for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
+                if ((*j).updated_at > j.get_node()->next->value.updated_at) {
+                    swap((*j), j.get_node()->next->value);
                 }
             }
         }
     }
 
     void Reproducer::sort_by_artist() {
-        for (auto i = m_songs.begin(); i != --m_songs.end(); i++) {
-            for (auto j = ++m_songs.begin(); j != m_songs.end(); j++) {
-                if ((*i).artist > (*j).artist) {
-                    swap((*i), (*j));
+        for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
+                if ((*j).artist > j.get_node()->next->value.artist) {
+                    swap((*j), j.get_node()->next->value);
                 }
             }
         }
     }
     void Reproducer::sort_by_title() {
-        for (auto i = m_songs.begin(); i != --m_songs.end(); i++) {
-            for (auto j = ++m_songs.begin(); j != m_songs.end(); j++) {
-                if ((*i).title > (*j).title) {
-                    swap((*i), (*j));
+        for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
+                if ((*j).title > j.get_node()->next->value.title) {
+                    swap((*j), j.get_node()->next->value);
                 }
             }
         }
