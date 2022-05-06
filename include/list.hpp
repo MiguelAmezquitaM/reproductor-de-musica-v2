@@ -8,28 +8,28 @@ namespace RDM {
     class list {
 
     public: // Types
-        using ValueType = Type;
+        using valuetype = Type;
 
     public: //Subclasses
 
         struct node {
         public:
-            node(const ValueType& value, node* prev, node* next);
-            node(const ValueType& value);
+            node(const valuetype& value, node* prev, node* next);
+            node(const valuetype& value);
             node() = default;
-            ~node();
+            ~node(); // Destructor is called before of destroy list
 
             // Value of concrete node
-            ValueType value;
-            node* prev{ nullptr };
-            node* next{ nullptr };
+            valuetype value;
+            list<valuetype>::node* prev{ nullptr };
+            list<valuetype>::node* next{ nullptr };
         };
 
-        struct iterator {
+        struct iterator { // Is used for iterate on the list easly
             iterator(node* p_node);
 
             node* get_node();
-            ValueType& operator*();
+            valuetype& operator*();
 
             iterator& operator++(int);
             iterator& operator--(int);
@@ -68,29 +68,29 @@ namespace RDM {
 
         // Insert an element in n-th index
         // No use this if list is empty
-        void insert_at(const ValueType& element, const uint32_t index);
+        void insert_at(const valuetype& element, const uint32_t index);
 
         // Insert an element at last
-        void push_back(const ValueType& element);
+        void push_back(const valuetype& element);
 
         // Insert an element at index
-        void push_front(const ValueType& element);
+        void push_front(const valuetype& element);
 
         // Pull methods
 
         // Return a reference to the index-th element 
-        ValueType& operator[](const uint32_t index) const;
+        valuetype& operator[](const uint32_t index) const;
 
         // Delete methods
 
         // Delete the last element and return it
-        ValueType pop_back();
+        valuetype pop_back();
 
         // Delete the first element and return it
-        ValueType pop_front();
+        valuetype pop_front();
 
         // Delete n-th element and return it
-        ValueType remove_at(const uint32_t index);
+        valuetype remove_at(const uint32_t index);
 
         // Remove all songs of list
         void clear();

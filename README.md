@@ -10,8 +10,8 @@ Las canciones incluyen:
 - Autor
 - Album
 - Fecha de modificacion
-- id
-- indicador de favorito
+- Id
+- Indicador de favorito
 
 Requerimientos
 

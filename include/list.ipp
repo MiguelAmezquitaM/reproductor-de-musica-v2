@@ -7,11 +7,11 @@ namespace RDM {
 
     // __________________NODE IMPL_________________________________
     template<typename Type>
-    list<Type>::node::node(const ValueType& value, node* prev, node* next)
+    list<Type>::node::node(const valuetype& value, node* prev, node* next)
         : value{ value }, prev{ prev }, next{ next } {}
 
     template<typename Type>
-    list<Type>::node::node(const ValueType& value)
+    list<Type>::node::node(const valuetype& value)
         : node(value, nullptr, nullptr) {
     }
 
@@ -99,7 +99,7 @@ namespace RDM {
     inline typename list<Type>::iterator list<Type>::end() const { return iterator(m_final); }
 
     template<typename Type>
-    void list<Type>::insert_at(const ValueType& value, const uint32_t index) {
+    void list<Type>::insert_at(const valuetype& value, const uint32_t index) {
         if (index == 0)      return push_front(value);
         if (index == m_size) return push_back(value);
 
@@ -113,7 +113,7 @@ namespace RDM {
     }
 
     template<typename Type>
-    void list<Type>::push_back(const ValueType& value) {
+    void list<Type>::push_back(const valuetype& value) {
         node* new_element_node = new node(value, m_final->prev, m_final);
         m_final->prev->next = new_element_node;
         m_final->prev = new_element_node;
@@ -121,7 +121,7 @@ namespace RDM {
     }
 
     template<typename Type>
-    void list<Type>::push_front(const ValueType& value) {
+    void list<Type>::push_front(const valuetype& value) {
         auto new_element_node = new node(value, m_initial, m_initial->next);
         m_initial->next->prev = new_element_node;
         m_initial->next = new_element_node;
@@ -138,7 +138,7 @@ namespace RDM {
     template<typename Type>
     Type list<Type>::remove_at(const uint32_t index) {
         node* element_to_remove = get_node(index);
-        ValueType element;
+        valuetype element;
 
         m_size--;
 
