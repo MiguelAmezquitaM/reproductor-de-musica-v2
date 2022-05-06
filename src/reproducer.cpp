@@ -125,7 +125,7 @@ namespace RDM {
 
     void Reproducer::sort_by_updated_at() {
         for (auto i = m_songs.begin(); i != m_songs.end(); i++) {
-            for (auto j = m_songs.begin(); j != m_songs.end(); j++) {
+            for (auto j = m_songs.begin(); j != --m_songs.end(); j++) {
                 if ((*j).updated_at > j.get_node()->next->value.updated_at) {
                     swap((*j), j.get_node()->next->value);
                 }
