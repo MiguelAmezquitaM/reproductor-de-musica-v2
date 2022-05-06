@@ -49,8 +49,9 @@ namespace RDM {
         bool only_favorites{ false };
 
         // utils functions
-        list<Song>::node* get_node_by_id(const uint32_t id) const;
-        uint32_t            get_index_by_id(const uint32_t id) const;
+        list<Song>::node*   get_node_by_id(const uint32_t id)   const;
+        uint32_t            get_index_by_id(const uint32_t id)  const;
+        
         static void         m_print_song(const Song& song);
         static void         m_print_keys();
 
