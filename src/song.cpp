@@ -1,4 +1,5 @@
 #include <song.hpp>
+#include <ctime>
 
 using namespace std;
 

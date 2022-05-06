@@ -57,8 +57,10 @@ namespace RDM {
     void Reproducer::play_favorites() {
         if (!has_favorites()) throw logic_error(NoFavoritesSong);
         for (auto song : m_songs) {
-            if (song.is_favorite)
+            if (song.is_favorite) {
                 m_playing_song = get_node_by_id(song.id);
+                only_favorites = true;
+            }
         }
     }
 
