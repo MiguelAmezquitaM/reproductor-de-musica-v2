@@ -6,8 +6,9 @@ int main() {
     try {
         mainMenu();
     }
-    catch (...) {
+    catch (std::exception* e) {
         std::cout << "Ocurrio un error desconocido\n";
+        std::cout << e->what() << "\n";
     }
     return 0;
 }

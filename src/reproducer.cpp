@@ -51,6 +51,7 @@ namespace RDM {
 
     void Reproducer::play_song(const uint32_t id) {
         m_playing_song = get_node_by_id(id);
+        only_favorites = false;
         if (!m_playing_song) throw logic_error(DontExistSongError(id));
     }
 
@@ -72,7 +73,7 @@ namespace RDM {
                 m_playing_song = m_playing_song->next;
             } while (!m_playing_song->value.is_favorite);
         }
-        else m_playing_song = m_playing_song->next;
+        else m_playing_song = (m_playing_song->next == m_songs.end().get_node() ? m_playing_song->next->next : m_playing_song->next);
     }
 
     void Reproducer::play_prev() {
@@ -83,7 +84,7 @@ namespace RDM {
                 m_playing_song = m_playing_song->prev;
             } while (!m_playing_song->value.is_favorite);
         }
-        else m_playing_song = m_playing_song->prev;
+        else m_playing_song = (m_playing_song->prev == m_songs.end().get_node() ? m_playing_song->prev->prev : m_playing_song->prev);
     }
 
     void Reproducer::play_random() {

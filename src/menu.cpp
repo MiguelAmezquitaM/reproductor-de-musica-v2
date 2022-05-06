@@ -64,15 +64,15 @@ namespace RDM {
             break;
         case 7:
             try { unimagMusic.play_next(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+            catch (logic_error e) { clearConsole(); cout << e.what() << endl; pause(); }
             break;
         case 8:
             try { unimagMusic.play_prev(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+            catch (logic_error e) { clearConsole(); cout << e.what() << endl; pause(); }
             break;
         case 9:
             try { unimagMusic.play_random(); }
-            catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+            catch (logic_error e) { clearConsole(); cout << e.what() << endl; pause(); }
             break;
         case 10:
             editSong(unimagMusic);
