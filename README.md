@@ -36,14 +36,14 @@ Requerimientos
 Trabajo en equipo
 
 - Miguel Amézquita:
-* Diseño de los tad
-* Diseño del menú
+1. Diseño de los tad
+2. Diseño del menú
 
 - Cristian Gómez:
-* Implementación de la lista
+1. Implementación de la lista
 
 - Lenis Stevez y Andrés Luna
-* Implementación del reproductor
+1. Implementación del reproductor
 
 - Daniel Pinilla
-* Implementación del menú
+1. Implementación del menú
