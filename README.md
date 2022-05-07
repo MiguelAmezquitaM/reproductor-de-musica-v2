@@ -33,20 +33,20 @@ Requerimientos
 16. Reproducir una canción aleatoria
 
 
-Trabajo en equipo
+# Trabajo en equipo
 
-- Miguel Amézquita:
-1. Diseño de los tad
-2. Diseño del menú
+# Miguel Amézquita:
+* Diseño de los tad
+* Diseño del menú
 
-- Cristian Gómez:
-1. Implementación de la lista
+# Cristian Gómez:
+* Implementación de la lista
 
-- Lenis Stevez y Andrés Luna
-1. Implementación del reproductor
+# Lenis Stevez y Andrés Luna
+* Implementación del reproductor
 
-- Daniel Pinilla
-1. Implementación del menú
+# Daniel Pinilla
+* Implementación del menú
 
 # Instrucciones
 
