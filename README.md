@@ -47,3 +47,9 @@ Trabajo en equipo
 
 - Daniel Pinilla
 1. Implementación del menú
+
+# Instrucciones
+
+1. Descargue o clone este repositorio
+2. Si está en windows ejecute reproductor.exe
+3. Si desea compilar el proyecto manualmente, puede hacerlo con g++, otra alternativa es usar el entorno Dev-C++ abriendo 'reproductor.dev' luego yendo a la configuracion del proyecto, y agregar en los parametros del compilador, -I[direccion_del_proyecto]/include
