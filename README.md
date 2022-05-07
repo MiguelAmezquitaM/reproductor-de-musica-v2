@@ -1,9 +1,9 @@
-Proyecto de estructura de datos
+# Proyecto de estructura de datos
 
 El proyecto consiste en un reproductor de musica que implementa
-una lista circular doblemente enlazada
+una **lista circular doblemente enlazada**
 
-TAD de Canciones
+## TAD de Canciones
 
 Las canciones incluyen:
 - Titulo
@@ -13,7 +13,7 @@ Las canciones incluyen:
 - Id
 - Indicador de favorito
 
-Requerimientos
+## Requerimientos
 
 1. Agregar canción
 2. Reproducir una canción
@@ -33,22 +33,22 @@ Requerimientos
 16. Reproducir una canción aleatoria
 
 
-# Trabajo en equipo
+## Trabajo en equipo
 
-# Miguel Amézquita:
+### Miguel Amézquita:
 * Diseño de los tad
 * Diseño del menú
 
-# Cristian Gómez:
+### Cristian Gómez:
 * Implementación de la lista
 
-# Lenis Stevez y Andrés Luna
+### Lenis Stevez y Andrés Luna
 * Implementación del reproductor
 
-# Daniel Pinilla
+### Daniel Pinilla
 * Implementación del menú
 
-# Instrucciones
+### Instrucciones
 
 1. Descargue o clone este repositorio
 2. Si está en windows ejecute reproductor.exe
