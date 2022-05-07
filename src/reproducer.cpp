@@ -104,8 +104,6 @@ namespace RDM {
     }
 
     void Reproducer::remove_song(const uint32_t id) {
-        if (m_songs.is_empty()) throw logic_error(DontExistSongError(id));
-
         if (m_playing_song and m_playing_song->value.id == id)
             m_playing_song = nullptr;
 

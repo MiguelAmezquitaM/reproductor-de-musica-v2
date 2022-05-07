@@ -64,15 +64,15 @@ namespace RDM {
                 break;
             case 7:
                 try { unimagMusic.play_next(); }
-                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                catch (const logic_error& e) { clearConsole(); cout << e.what() << endl; pause(); }
                 break;
             case 8:
                 try { unimagMusic.play_prev(); }
-                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                catch (const logic_error& e) { clearConsole(); cout << e.what() << endl; pause(); }
                 break;
             case 9:
                 try { unimagMusic.play_random(); }
-                catch (exception* e) { clearConsole(); cout << e->what() << endl; pause(); }
+                catch (const logic_error& e) { clearConsole(); cout << e.what() << endl; pause(); }
                 break;
             case 10:
                 editSong(unimagMusic);
@@ -131,11 +131,11 @@ namespace RDM {
     void addSongToFavorites(Reproducer& mr) {
         int id;
         clearConsole();
+        mr.list_songs();
 
-        if (mr.has_songs()) {
-            mr.list_songs();
+        if (!mr.has_songs()) {
+            pause(); return;
         }
-        else { pause(); return; }
 
         cout << "\nInput ID of song: ";
         cin >> id;
@@ -144,7 +144,7 @@ namespace RDM {
         try {
             mr.add_song_to_favorites(id);
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << endl;
             pause();
         }
@@ -153,18 +153,19 @@ namespace RDM {
     void playSong(Reproducer& mr) {
         int id;
         clearConsole();
-        if (mr.has_songs()) {
-            mr.list_songs();
-        }
-        else { pause(); return; }
+        mr.list_songs();
 
-        cout << "Input ID if song: ";
+        if (!mr.has_songs()) {
+            pause(); return;
+        }
+
+        cout << "\nInput ID if song: ";
         cin >> id;
 
         try {
             mr.play_song(id);
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << endl;
         }
 
@@ -176,7 +177,7 @@ namespace RDM {
         try {
             mr.play_favorites();
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << "\n";
             pause();
         }
@@ -185,11 +186,10 @@ namespace RDM {
     void showSongs(Reproducer& mr) {
         clearConsole();
 
-        try {
-            mr.list_songs();
-        }
-        catch (logic_error& e) {
-            cout << e.what() << "\n";
+        mr.list_songs();
+
+        if (!mr.has_songs()) {
+            pause(); return;
         }
 
         pause();
@@ -198,11 +198,10 @@ namespace RDM {
     void showFavoriteSongs(Reproducer& mr) {
         clearConsole();
 
-        try {
-            mr.list_favorite_songs();
-        }
-        catch (logic_error& e) {
-            cout << e.what() << "\n";
+        mr.list_favorite_songs();
+
+        if (!mr.has_favorites()) {
+            pause(); return;
         }
 
         pause();
@@ -213,12 +212,13 @@ namespace RDM {
         Song* song;
         clearConsole();
 
-        if (mr.has_songs()) {
-            mr.list_songs();
-        }
-        else { pause(); return; }
+        mr.list_songs();
 
-        cout << "Input ID of song: ";
+        if (!mr.has_songs()) {
+            pause(); return;
+        }
+
+        cout << "\nInput ID of song: ";
         cin >> id;
         cin.ignore();
         cout << "\n\n";
@@ -226,7 +226,7 @@ namespace RDM {
         try {
             song = &mr.get_song(id);
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << endl;
             pause();
             return;
@@ -306,12 +306,14 @@ namespace RDM {
 
         cout << "\nInput the ID: ";
         cin >> id;
+        cin.ignore();
 
         try {
             mr.remove_song(id);
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << endl;
+            pause();
         }
     }
 
@@ -332,7 +334,7 @@ namespace RDM {
         try {
             mr.remove_favorite(id);
         }
-        catch (logic_error& e) {
+        catch (const logic_error& e) {
             cout << e.what() << endl;
             pause();
         }
